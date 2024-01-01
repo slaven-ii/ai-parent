@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ThreadsController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,8 @@ Route::post('/sanctum/token', TokenController::class);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', AuthController::class);
+    Route::post('/ask', [ThreadsController::class, 'ask']);
+    Route::post('/check', [ThreadsController::class, 'checkThreadStatus']);
+    Route::get('/threads', [ThreadsController::class, 'list']);
+    Route::post('/threads/messages', [ThreadsController::class, 'messagesList']);
 });
