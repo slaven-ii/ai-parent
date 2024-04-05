@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\ThreadsController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/threads', [ThreadsController::class, 'list']);
     Route::post('/threads/messages', [ThreadsController::class, 'messagesList']);
 });
+
+
+
+Route::middleware(['web'])->group(function () {
+//Routes for social login/registration
+    Route::get('/auth/redirect/{provider}', function (Request $request, $provider) {
+        return Response::json(['data' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl()]);
+    });
+    Route::get('/auth/callback/{provider}', [SocialLoginController::class, 'socialLogin']);
+});
+
