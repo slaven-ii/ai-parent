@@ -12,7 +12,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.8",
-        "openai-php/client": "^0.8.1"
+        "openai-php/client": "^0.8.1",
+        "laravel/nova": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
@@ -68,5 +69,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "nova": {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    }
 }

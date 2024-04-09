@@ -5,6 +5,7 @@ use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\ThreadsController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -20,6 +21,7 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    $request->session()->reflash();
     return $request->user();
 });
 
@@ -35,9 +37,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 
-Route::middleware(['web'])->group(function () {
+Route::middleware(['web', 'invitation'])->group(function () {
 //Routes for social login/registration
     Route::get('/auth/redirect/{provider}', function (Request $request, $provider) {
+        if($request->has('origin')){
+            $request->session()->put('origin', $request->input('origin'));
+        }
+        $token = $request->input('invitation_token');
+
+        if($token){
+            $request->session()->put('invitation_token', $token);
+        }
         return Response::json(['data' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl()]);
     });
     Route::get('/auth/callback/{provider}', [SocialLoginController::class, 'socialLogin']);
