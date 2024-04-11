@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(1)->create(
             [
-                'name' => 'Luke Skywalker',
-                'email' => 'luke@jedi.com',
+                'name' => 'Slaven admin',
+                'email' => 'slaven@mevolti.com',
                 'email_verified_at' => null,
             ]
         );
