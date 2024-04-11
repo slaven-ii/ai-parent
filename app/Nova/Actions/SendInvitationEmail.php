@@ -2,12 +2,14 @@
 
 namespace App\Nova\Actions;
 
-use App\Mail\SendInvitation;
+//use App\Mail\SendInvitation;
+use App\Notifications\SendInvitation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -26,8 +28,7 @@ class SendInvitationEmail extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         foreach ($models as $model) {
-            Mail::to($model->email)
-                ->queue(new SendInvitation($model));
+            Notification::route('mail', $model->email)->notify(new SendInvitation($model));
         }
 
     }
