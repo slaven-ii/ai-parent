@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->command('runs:run')->everyFiveSeconds();
+         $schedule->command('runs:run')->everyTenSeconds()->withoutOverlapping();
     }
 
     /**
