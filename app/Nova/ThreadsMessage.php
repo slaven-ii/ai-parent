@@ -47,7 +47,7 @@ class ThreadsMessage extends Resource
             ID::make()->sortable(),
             Text::make('Role'),
             Text::make('Content'),
-            DateTime::make('Created at')
+            DateTime::make('Created at')->sortable()
         ];
     }
 
