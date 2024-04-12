@@ -35,6 +35,7 @@ class ThreadsMessage extends Resource
         'id',
     ];
 
+    public static $perPageViaRelationship = 50;
     /**
      * Get the fields displayed by the resource.
      *
