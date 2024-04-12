@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response("42");
+    //return view('welcome');
 });
-
+/*
 Route::group(['prefix' => 'threads', 'middleware' => ['auth']], function () {
     Route::get('/list', [ThreadsController::class, 'index']);
     Route::get('/create', [ThreadsController::class, 'create']);
     Route::get('/list', [ThreadsController::class, 'index']);
     Route::get('/show', [ThreadsController::class, 'show']);
 });
+*/
