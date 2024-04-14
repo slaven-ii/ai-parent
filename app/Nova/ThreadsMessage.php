@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Laravel\Nova\Exceptions\NovaException;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Markdown;
@@ -36,18 +39,22 @@ class ThreadsMessage extends Resource
     ];
 
     public static $perPageViaRelationship = 50;
+
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
+     * @throws NovaException
      */
     public function fields(NovaRequest $request)
     {
         return [
             ID::make()->sortable(),
             Text::make('Role'),
-            Text::make('Content'),
+            Text::make('Content')->displayUsing(function ($value) {
+                return Str::limit($value, 50);
+            }),
             DateTime::make('Created at')->sortable()
         ];
     }

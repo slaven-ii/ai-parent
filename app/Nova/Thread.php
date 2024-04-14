@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -43,6 +44,7 @@ class Thread extends Resource
         return [
             ID::make()->sortable(),
             DateTime::make('Created at'),
+            BelongsTo::make('User'),
             HasMany::make("Threads messages", 'messages')->sortable()
         ];
     }

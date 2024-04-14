@@ -20,4 +20,9 @@ class ThreadsMessages extends Model
         'role',
         'content'
     ];
+
+    public function thread()
+    {
+        return $this->belongsTo(Threads::class);
+    }
 }
