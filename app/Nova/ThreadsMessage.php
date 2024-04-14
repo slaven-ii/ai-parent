@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Threads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Exceptions\NovaException;
@@ -56,6 +57,7 @@ class ThreadsMessage extends Resource
                 return Str::limit($value, 50);
             })->hideFromDetail()->hideWhenCreating()->hideWhenCreating(),
             Text::make('Content')->hideFromIndex(),
+            BelongsTo::make("Thread"),
             DateTime::make('Created at')->sortable()
         ];
     }
