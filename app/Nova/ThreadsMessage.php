@@ -54,7 +54,8 @@ class ThreadsMessage extends Resource
             Text::make('Role'),
             Text::make('Content')->displayUsing(function ($value) {
                 return Str::limit($value, 50);
-            }),
+            })->hideFromDetail()->hideWhenCreating()->hideWhenCreating(),
+            Text::make('Content')->hideFromIndex(),
             DateTime::make('Created at')->sortable()
         ];
     }
