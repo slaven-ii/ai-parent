@@ -162,7 +162,7 @@ class ThreadsController extends Controller
 
             $response = $client->threads()->runs()->create($payload['thread_id'],
                 [
-                    'assistant_id' => 'asst_clECkek63y6jIMGWwPoLmtAS',
+                    'assistant_id' => $assistantId,
                 ],
             );
 
@@ -214,7 +214,7 @@ class ThreadsController extends Controller
             if($response->status == ThreadsRuns::STATUS_QUEUED){
                 $thread = $user->threads()->create([
                     'id' => $response->threadId,
-                    'title' => $payload['message'],
+                    'title' => Str::limit($payload['message'], 20),
                     'assistant_id' => $assistantId
                 ]);
 
