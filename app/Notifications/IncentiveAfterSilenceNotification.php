@@ -50,11 +50,11 @@ class IncentiveAfterSilenceNotification extends Notification
         dump($content);
         return (new MailMessage)
             ->subject("$subject boriš li se još sa $title")
-            ->greeting('Pozdrav $subject')
+            ->greeting("Pozdrav $subject")
             ->line(new HtmlString($content))
-            ->line('Znamo da roditeljstvo ne dolazi sa uputama, ako želite detaljnije o navedenoj temi ili imate novi izazov ulogirajte se u Parentlyo i dobijte potrebnu podršku')
-            ->action('Parentlyo', $base)
-            ->line('Kao beta testeru, hvala na podršci i potpori u građenju alata za roditelje');
+            ->line('Znamo da roditeljstvo ne dolazi sa uputama, ako želite detaljnije o navedenoj temi ili imate novi izazov ulogirajte se u Parentlyo i dobijte potrebnu podršku.')
+            ->action('Postavi pitanje', $base)
+            ->line('Kao beta testeru, hvala na podršci i potpori u građenju alata za roditelje.');
     }
 
     /**
